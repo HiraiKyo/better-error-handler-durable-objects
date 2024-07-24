@@ -1,0 +1,29 @@
+{
+  "name": "better-error-handler-durable-objects",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Better error handling for Cloudflare DurableObjects with Cloudflare Worker + Hono",
+  "exports": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsx",
+    "prepack": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "HiraiKyo",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240722.0",
+    "@types/node": "^20.14.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
