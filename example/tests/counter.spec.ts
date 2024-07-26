@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { env } from "cloudflare:test";
-import app from "../src";
+import { app } from "../src/routes/counter";
 
 // Durable Object Integration test
 describe("Counter Test", () => {
@@ -28,36 +28,50 @@ describe("Counter Test", () => {
 
 // Endpoint Integration tests
 describe("Counter Endpoint Test", () => {
-	it("POST /counter/increment", async () => {
-		const res = await app.request("/counter/increment", {
-			method: "POST",
-			body: JSON.stringify({ value: 1 }),
-			headers: {
-				"Content-Type": "application/json",
+	it("POST /increment", async () => {
+		const res = await app.request(
+			"/increment",
+			{
+				method: "POST",
+				body: JSON.stringify({ value: 1 }),
+				headers: {
+					"Content-Type": "application/json",
+				},
 			},
-		});
+			env
+		);
 		expect(res.status).toEqual(201);
 		const body = await res.json();
 		expect(body).toEqual({
 			count: 1,
 		});
 	});
-	it("POST /counter/decrement", async () => {
-		const res = await app.request("/counter/decrement", {
-			method: "POST",
-			body: JSON.stringify({ value: 1 }),
-			headers: {
-				"Content-Type": "application/json",
+	it("POST /decrement", async () => {
+		const res = await app.request(
+			"/decrement",
+			{
+				method: "POST",
+				body: JSON.stringify({ value: 1 }),
+				headers: {
+					"Content-Type": "application/json",
+				},
 			},
-		});
+			env
+		);
 		expect(res.status).toEqual(201);
 		const body = await res.json();
 		expect(body).toEqual({
 			count: -1,
 		});
 	});
-	it("GET /counter", async () => {
-		const res = await app.request("/counter");
+	it("GET /", async () => {
+		const res = await app.request(
+			"/",
+			{
+				method: "GET",
+			},
+			env
+		);
 		expect(res.status).toEqual(200);
 		const body = await res.json();
 		expect(body).toEqual({
